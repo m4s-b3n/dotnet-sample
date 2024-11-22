@@ -1,0 +1,74 @@
+name: Release Application
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Lint
+        uses: super-linter/super-linter@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILTER_REGEX_EXCLUDE: CHANGELOG.md
+          VALIDATE_CSS: false
+          VALIDATE_JSCPD: false
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_GIT_MERGE_CONFLICT_MARKERS: false
+
+  build:
+    name: Build, Test & Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      checks: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Restore
+        run: dotnet restore -v d
+        working-directory: src
+      - name: Build
+        run: dotnet build -c Release -v d
+        working-directory: src
+      - name: Test
+        run: dotnet test -c Release -v d --logger trx
+        working-directory: src
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: .NET Tests
+          path: ${{ github.workspace }}/src/**/*.trx
+          reporter: dotnet-trx
+      - name: Publish
+        run: dotnet publish -c Release -v d -o ${{ github.workspace }}/app
+        working-directory: src
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ github.sha }}
+          path: app
