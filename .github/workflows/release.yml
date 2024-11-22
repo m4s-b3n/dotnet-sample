@@ -72,3 +72,43 @@ jobs:
         with:
           name: build-${{ github.sha }}
           path: app
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+      - build
+    permissions:
+      contents: read
+    outputs:
+      new_release_published: ${{ steps.semrel.outputs.new_release_published == 'true' }}
+      new_release_version: ${{ steps.semrel.outputs.new_release_version }}
+      last_release_version: ${{ steps.semrel.outputs.last_release_version }}
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ github.sha }}
+          path: app
+      - name: Zip artifact
+        run: zip -r voting.zip app
+      - uses: actions/create-github-app-token@v1
+        id: token
+        with:
+          app-id: ${{ vars.APP_ID_SEMREL }}
+          private-key: ${{ secrets.APP_KEY_SEMREL }}
+      - name: Semantic release
+        id: semrel
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          dry_run: ${{ github.event_name != 'push' }}
+          ci: true
+        env:
+          GITHUB_TOKEN: ${{ steps.token.outputs.token }}
