@@ -1,0 +1,32 @@
+{
+  "name": "Ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": true,
+      "azureDnsAutoDetection": true,
+      "installDockerBuildx": true,
+      "installDockerComposeSwitch": true,
+      "version": "latest",
+      "dockerDashComposeVersion": "latest"
+    },
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "7.0"
+    },
+    "ghcr.io/rjfmachado/devcontainer-features/cloud-native:1": {
+      "kubectl": "latest",
+      "helm": "latest",
+      "kubelogin": "none",
+      "azwi": "none",
+      "flux": "none",
+      "cilium": "none"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "installYarnUsingApt": true,
+      "version": "18",
+      "pnpmVersion": "none",
+      "nvmVersion": "none"
+    }
+  }
+}
