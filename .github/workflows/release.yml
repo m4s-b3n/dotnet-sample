@@ -48,6 +48,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "7.x"
       - name: Restore
         run: dotnet restore -v d
         working-directory: src
@@ -108,6 +111,8 @@ jobs:
         id: semrel
         uses: cycjimmy/semantic-release-action@v4
         with:
+          extra_plugins: |
+            semantic-release-replace-plugin
           dry_run: ${{ github.event_name != 'push' }}
           ci: true
         env:
