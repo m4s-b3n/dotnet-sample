@@ -108,6 +108,8 @@ jobs:
         id: semrel
         uses: cycjimmy/semantic-release-action@v4
         with:
+          extra_plugins: |
+            semantic-release-replace-plugin
           dry_run: ${{ github.event_name != 'push' }}
           ci: true
         env:
