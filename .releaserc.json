@@ -11,10 +11,31 @@
       }
     ],
     [
+      "semantic-release-replace-plugin",
+      {
+        "replacements": [
+          {
+            "files": ["helm/common.yaml"],
+            "from": "tag: .*",
+            "to": "tag: ${nextRelease.version}",
+            "results": [
+              {
+                "file": "helm/common.yaml",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
+          }
+        ]
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
-        "assets": ["CHANGELOG.md"]
+        "assets": ["CHANGELOG.md", "helm/common.yaml"]
       }
     ],
     [
