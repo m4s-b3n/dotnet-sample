@@ -5,14 +5,20 @@ on:
     types: [released]
   workflow_dispatch:
     inputs:
+      build:
+        type: boolean
+        description: "Build and push"
+        required: true
+        default: true
       tag:
         type: string
         description: "Image tag (e.g. 1.0.0)"
-        required: false
+        required: true
+        default: "1.0.0"
       latest:
         type: boolean
         description: "Tag as latest"
-        required: false
+        required: true
         default: false
 
 permissions: {}
@@ -20,6 +26,7 @@ permissions: {}
 jobs:
   docker:
     name: Docker
+    if: ${{ github.event_name != 'release' || github.event.inputs.build == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -56,3 +63,37 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy
+    if: ${{ success() || github.event.inputs.build == 'false' }}
+    needs: docker
+    environment: k8s-deploy
+    runs-on: k8s-deploy
+    permissions:
+      contents: read
+    container:
+      image: alpine:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install helm
+        run: apk add helm --no-cache
+      - name: Add Helm repo
+        run: |
+          helm repo add stakater https://stakater.github.io/stakater-charts
+      - name: Deploy with Helm
+        env:
+          IMAGE_TAG: ${{ github.event.inputs.tag }}
+        run: |
+          helm upgrade -i \
+            voting \
+             stakater/application \
+            --version 5.2.3 \
+            --namespace voting \
+            --create-namespace \
+            --values helm/common.yaml \
+            --set ingress.hosts[0].host=${{ vars.FQDN }} \
+            ${IMAGE_TAG:+--set deployment.image.tag=$IMAGE_TAG}
