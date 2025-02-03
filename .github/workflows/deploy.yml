@@ -65,7 +65,7 @@ jobs:
 
   deploy:
     name: Deploy
-    if: ${{ success() || inputs.skip-build }}
+    if: ${{ success() || github.event.inputs.skip-build }}
     needs: docker
     environment: k8s-deploy
     runs-on: k8s-deploy
@@ -84,6 +84,8 @@ jobs:
         run: |
           helm repo add stakater https://stakater.github.io/stakater-charts
       - name: Deploy with Helm
+        env:
+          IMAGE_TAG: ${{ github.event.inputs.tag }}
         run: |
           helm upgrade -i \
             voting \
@@ -92,4 +94,5 @@ jobs:
             --namespace voting \
             --create-namespace \
             --values helm/common.yaml \
-            --set ingress.hosts[0].host=${{ vars.FQDN }}
+            --set ingress.hosts[0].host=${{ vars.FQDN }} \
+            ${IMAGE_TAG:+--set deployment.image.tag=$IMAGE_TAG}
