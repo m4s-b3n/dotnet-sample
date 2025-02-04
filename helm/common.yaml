@@ -3,7 +3,7 @@ applicationName: voting
 deployment:
   image:
     repository: ghcr.io/m4s-b3n/dotnet-sample
-    tag: 1.0.0
+    tag: 1.1.0
     pullPolicy: Always
   ports:
     - name: http
