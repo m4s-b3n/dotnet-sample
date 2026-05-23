@@ -1,0 +1,3 @@
+[codespell]
+skip = .dev,* /wwwroot/lib/*,*/wwwroot / css / bootstrap/*,*/wwwroot / css / open - iconic/*,*.min.js,*.min.css,*.css.map,*/obj/*,*/bin/*
+ignore-words-list = checkin,paket,elease,eleases

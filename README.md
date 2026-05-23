@@ -6,15 +6,15 @@ The application demonstrates step by step the transformation from a simple appli
 
 ## Step-By-Step
 
-1. Intial App: `git checkout app`
+1. Initial App: `git checkout app`
 2. Workflow: `git checkout actions`
 3. Semantic Release: `git checkout semrel`
 4. Docker: `git checkout docker`
 5. Kubernetes: `git checkout k8s`
 
-## Deploy using actions worflow
+## Deploy using actions workflow
 
-If the [![Deploy Release](https://github.com/m4s-b3n/dotnet-sample/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/m4s-b3n/dotnet-sample/actions/workflows/deploy.yml) worfklow is successfull, the application is available under the FQDN from the deployment-environment.
+If the [![Deploy Release](https://github.com/m4s-b3n/dotnet-sample/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/m4s-b3n/dotnet-sample/actions/workflows/deploy.yml) workflow is successful, the application is available under the FQDN from the deployment-environment.
 
 ## Build & run locally
 

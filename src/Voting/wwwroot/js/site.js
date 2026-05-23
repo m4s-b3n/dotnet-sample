@@ -58,7 +58,7 @@ app.controller("VotingAppController", [
 function updateFooter(http, timeTaken) {
   if (http.status < 299) {
     statusText.innerHTML =
-      "Reponse:<br />HTTP status " +
+      "Response:<br />HTTP status " +
       http.status +
       " " +
       http.statusText +
@@ -66,6 +66,6 @@ function updateFooter(http, timeTaken) {
       timeTaken.toString() +
       " ms";
   } else {
-    statusText.innerHTML = "Error:<br /> An error occured";
+    statusText.innerHTML = "Error:<br /> An error occurred";
   }
 }

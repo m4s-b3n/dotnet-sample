@@ -1,12 +1,9 @@
 using System.Diagnostics;
-using Orleans;
-using Orleans.Providers;
 using Orleans.Runtime;
 using VotingContract;
 
 namespace VotingData;
 
-[StorageProvider(ProviderName = "votes")]
 public class VoteGrain : Grain, IVoteGrain
 {
     private readonly ILogger _logger;

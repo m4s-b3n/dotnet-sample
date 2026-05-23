@@ -1,0 +1,14 @@
+# Ignore everything by default
+*
+
+# CI target: pre-built artifacts downloaded by workflow
+!app/
+!app/**
+
+# Local target: source files needed for dotnet publish
+!src/Voting/
+!src/Voting/**
+
+# Re-exclude build outputs inside source
+src/Voting/bin/
+src/Voting/obj/

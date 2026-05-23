@@ -46,11 +46,13 @@
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
   --bs-body-rgb: 33, 37, 41;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", roboto,
-    "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --bs-font-monospace: sfmono-regular, menlo, monaco, consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --bs-font-sans-serif:
+    system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial,
+    "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace:
+    sfmono-regular, menlo, monaco, consolas, "Liberation Mono", "Courier New",
+    monospace;
   --bs-gradient: linear-gradient(
     180deg,
     rgb(255 255 255 / 15%),
@@ -185,9 +187,7 @@ p {
 abbr[data-bs-original-title],
 abbr[title] {
   text-decoration: underline dotted;
-  text-decoration: underline dotted;
   cursor: help;
-  text-decoration-skip-ink: none;
   text-decoration-skip-ink: none;
 }
 
@@ -303,7 +303,7 @@ pre code {
 code {
   font-size: 0.875em;
   color: #d63384;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 a > code {
@@ -394,7 +394,7 @@ select {
 }
 
 select {
-  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 select:disabled {
@@ -409,7 +409,7 @@ select:disabled {
 [type="reset"],
 [type="submit"],
 button {
-  appearance: button;
+  appearance: auto;
 }
 
 [type="button"]:not(:disabled),
@@ -487,7 +487,7 @@ legend + * {
 
 ::-webkit-file-upload-button {
   font: inherit;
-  appearance: button;
+  appearance: auto;
 }
 
 output {
@@ -2276,8 +2276,6 @@ progress {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   appearance: none;
-  appearance: none;
-  appearance: none;
   border-radius: 0.25rem;
   transition:
     border-color 0.15s ease-in-out,
@@ -2374,16 +2372,10 @@ progress {
     background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
-  transition:
-    color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .form-control::-webkit-file-upload-button {
-    transition: none;
     transition: none;
   }
 }
@@ -2504,8 +2496,6 @@ textarea.form-control-lg {
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   appearance: none;
-  appearance: none;
-  appearance: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2571,8 +2561,6 @@ textarea.form-control-lg {
   background-position: center;
   background-size: contain;
   border: 1px solid rgb(0 0 0 / 25%);
-  appearance: none;
-  appearance: none;
   appearance: none;
   -webkit-print-color-adjust: exact;
   color-adjust: exact;
@@ -2678,8 +2666,6 @@ textarea.form-control-lg {
   padding: 0;
   background-color: transparent;
   appearance: none;
-  appearance: none;
-  appearance: none;
 }
 
 .form-range:focus {
@@ -2713,17 +2699,11 @@ textarea.form-control-lg {
     background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
-  transition:
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  appearance: none;
   appearance: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .form-range::-webkit-slider-thumb {
-    transition: none;
     transition: none;
   }
 }
@@ -2752,17 +2732,11 @@ textarea.form-control-lg {
     background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
-  transition:
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  appearance: none;
   appearance: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .form-range::-moz-range-thumb {
-    transition: none;
     transition: none;
   }
 }
@@ -3031,7 +3005,8 @@ textarea.form-control.is-valid {
 .was-validated .form-select:valid:not([multiple], [size]),
 .was-validated .form-select:valid:not([multiple])[size="1"] {
   padding-right: 4.125rem;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"),
+  background-image:
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"),
     url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-position:
     right 0.75rem center,
@@ -3147,7 +3122,8 @@ textarea.form-control.is-invalid {
 .was-validated .form-select:invalid:not([multiple], [size]),
 .was-validated .form-select:invalid:not([multiple])[size="1"] {
   padding-right: 4.125rem;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"),
+  background-image:
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"),
     url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-position:
     right 0.75rem center,
@@ -3210,8 +3186,6 @@ textarea.form-control.is-invalid {
   text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
-  user-select: none;
-  user-select: none;
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
@@ -5153,7 +5127,7 @@ fieldset:disabled .btn {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgb(0 0 0 / 12.5%);
@@ -5760,12 +5734,10 @@ fieldset:disabled .btn {
 
 .progress-bar-animated {
   animation: 1s linear infinite progress-bar-stripes;
-  animation: 1s linear infinite progress-bar-stripes;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .progress-bar-animated {
-    animation: none;
     animation: none;
   }
 }
@@ -6206,8 +6178,6 @@ fieldset:disabled .btn {
 .btn-close:disabled {
   pointer-events: none;
   user-select: none;
-  user-select: none;
-  user-select: none;
   opacity: 0.25;
 }
 
@@ -6237,8 +6207,6 @@ fieldset:disabled .btn {
 
 .toast-container {
   width: max-content;
-  width: max-content;
-  width: max-content;
   max-width: 100%;
   pointer-events: none;
 }
@@ -6266,7 +6234,7 @@ fieldset:disabled .btn {
 
 .toast-body {
   padding: 0.75rem;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .modal {
@@ -6612,7 +6580,7 @@ fieldset:disabled .btn {
   white-space: normal;
   line-break: auto;
   font-size: 0.875rem;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   opacity: 0;
 }
 
@@ -6737,7 +6705,7 @@ fieldset:disabled .btn {
   white-space: normal;
   line-break: auto;
   font-size: 0.875rem;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid rgb(0 0 0 / 20%);
@@ -6897,7 +6865,6 @@ fieldset:disabled .btn {
   float: left;
   width: 100%;
   margin-right: -100%;
-  backface-visibility: hidden;
   backface-visibility: hidden;
   transition: transform 0.6s ease-in-out;
 }
@@ -7102,7 +7069,6 @@ fieldset:disabled .btn {
   border-right-color: transparent;
   border-radius: 50%;
   animation: 0.75s linear infinite spinner-border;
-  animation: 0.75s linear infinite spinner-border;
 }
 
 .spinner-border-sm {
@@ -7142,7 +7108,6 @@ fieldset:disabled .btn {
   border-radius: 50%;
   opacity: 0;
   animation: 0.75s linear infinite spinner-grow;
-  animation: 0.75s linear infinite spinner-grow;
 }
 
 .spinner-grow-sm {
@@ -7153,7 +7118,6 @@ fieldset:disabled .btn {
 @media (prefers-reduced-motion: reduce) {
   .spinner-border,
   .spinner-grow {
-    animation-duration: 1.5s;
     animation-duration: 1.5s;
   }
 }
@@ -7288,7 +7252,6 @@ fieldset:disabled .btn {
 
 .placeholder-glow .placeholder {
   animation: placeholder-glow 2s ease-in-out infinite;
-  animation: placeholder-glow 2s ease-in-out infinite;
 }
 
 @keyframes placeholder-glow {
@@ -7305,23 +7268,18 @@ fieldset:disabled .btn {
 
 .placeholder-wave {
   mask-image: linear-gradient(130deg, #000 55%, rgb(0 0 0 / 80%) 75%, #000 95%);
-  mask-image: linear-gradient(130deg, #000 55%, rgb(0 0 0 / 80%) 75%, #000 95%);
   mask-size: 200% 100%;
-  mask-size: 200% 100%;
-  animation: placeholder-wave 2s linear infinite;
   animation: placeholder-wave 2s linear infinite;
 }
 
 @keyframes placeholder-wave {
   100% {
-    mask-position: -200% 0%;
     mask-position: -200% 0%;
   }
 }
 
 @keyframes placeholder-wave {
   100% {
-    mask-position: -200% 0%;
     mask-position: -200% 0%;
   }
 }
@@ -7457,14 +7415,12 @@ fieldset:disabled .btn {
 
 .sticky-top {
   position: sticky;
-  position: sticky;
   top: 0;
   z-index: 1020;
 }
 
 @media (width >= 576px) {
   .sticky-sm-top {
-    position: sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -7474,7 +7430,6 @@ fieldset:disabled .btn {
 @media (width >= 768px) {
   .sticky-md-top {
     position: sticky;
-    position: sticky;
     top: 0;
     z-index: 1020;
   }
@@ -7482,7 +7437,6 @@ fieldset:disabled .btn {
 
 @media (width >= 992px) {
   .sticky-lg-top {
-    position: sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -7492,7 +7446,6 @@ fieldset:disabled .btn {
 @media (width >= 1200px) {
   .sticky-xl-top {
     position: sticky;
-    position: sticky;
     top: 0;
     z-index: 1020;
   }
@@ -7500,7 +7453,6 @@ fieldset:disabled .btn {
 
 @media (width >= 1400px) {
   .sticky-xxl-top {
-    position: sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -7701,7 +7653,6 @@ fieldset:disabled .btn {
 }
 
 .position-sticky {
-  position: sticky !important;
   position: sticky !important;
 }
 
@@ -8628,74 +8579,74 @@ fieldset:disabled .btn {
 }
 
 .text-break {
-  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
   word-break: break-word !important;
 }
 
 .text-primary {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-secondary {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-success {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-success-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-success-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-info {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-info-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-info-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-warning {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-warning-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-warning-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-danger {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-light {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-dark {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-black {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-white {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-body {
   --bs-text-opacity: 1;
 
-  color: rgba(var(--bs-body-rgb), var(--bs-text-opacity)) !important;
+  color: rgb(var(--bs-body-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-muted {
@@ -8741,16 +8692,13 @@ fieldset:disabled .btn {
 .bg-primary {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(
-    var(--bs-primary-rgb),
-    var(--bs-bg-opacity)
-  ) !important;
+  background-color: rgb(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-secondary {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(
+  background-color: rgb(
     var(--bs-secondary-rgb),
     var(--bs-bg-opacity)
   ) !important;
@@ -8759,61 +8707,55 @@ fieldset:disabled .btn {
 .bg-success {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(
-    var(--bs-success-rgb),
-    var(--bs-bg-opacity)
-  ) !important;
+  background-color: rgb(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-info {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-info-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-info-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-warning {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(
-    var(--bs-warning-rgb),
-    var(--bs-bg-opacity)
-  ) !important;
+  background-color: rgb(var(--bs-warning-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-danger {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-light {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-dark {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-black {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-white {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-body {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-body-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(var(--bs-body-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-transparent {
@@ -8848,19 +8790,13 @@ fieldset:disabled .btn {
 
 .user-select-all {
   user-select: all !important;
-  user-select: all !important;
-  user-select: all !important;
 }
 
 .user-select-auto {
   user-select: auto !important;
-  user-select: auto !important;
-  user-select: auto !important;
 }
 
 .user-select-none {
-  user-select: none !important;
-  user-select: none !important;
   user-select: none !important;
 }
 
