@@ -10,110 +10,31 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}-release
+  cancel-in-progress: false
 
 permissions: {}
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
+  ci:
+    name: CI
+    uses: infinite-automations/workflows/.github/workflows/ci-dotnet.yml@351e5260b800c2bf5e3c3437a5f8c7507bcc9399 # v1.0.0
+    with:
+      dry-run: ${{ github.event_name == 'pull_request' }}
+      dotnet-version: "10.x"
+      working-directory: src
+      docker-context: .
+      docker-target: ci
+      semrel-extra-plugins: |
+        semantic-release-replace-plugin
+    secrets:
+      APP_ID: ${{ vars.APP_ID_SEMREL }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_KEY_SEMREL }}
     permissions:
-      contents: read
-      packages: read
-      statuses: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Lint
-        uses: super-linter/super-linter@v7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_EXCLUDE: CHANGELOG.md
-          VALIDATE_CSS: false
-          VALIDATE_JSCPD: false
-          VALIDATE_JAVASCRIPT_STANDARD: false
-          VALIDATE_GIT_MERGE_CONFLICT_MARKERS: false
-
-  build:
-    name: Build, Test & Publish
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
       actions: read
       checks: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "7.x"
-      - name: Restore
-        run: dotnet restore -v d
-        working-directory: src
-      - name: Build
-        run: dotnet build -c Release -v d
-        working-directory: src
-      - name: Test
-        run: dotnet test -c Release -v d --logger trx
-        working-directory: src
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure() # run this step even if previous step failed
-        with:
-          name: .NET Tests
-          path: ${{ github.workspace }}/src/**/*.trx
-          reporter: dotnet-trx
-      - name: Publish
-        run: dotnet publish -c Release -v d -o ${{ github.workspace }}/app
-        working-directory: src
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-${{ github.sha }}
-          path: app
-
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    needs:
-      - lint
-      - build
-    permissions:
-      contents: read
-    outputs:
-      new_release_published: ${{ steps.semrel.outputs.new_release_published == 'true' }}
-      new_release_version: ${{ steps.semrel.outputs.new_release_version }}
-      last_release_version: ${{ steps.semrel.outputs.last_release_version }}
-    steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-${{ github.sha }}
-          path: app
-      - name: Zip artifact
-        run: zip -r voting.zip app
-      - uses: actions/create-github-app-token@v1
-        id: token
-        with:
-          app-id: ${{ vars.APP_ID_SEMREL }}
-          private-key: ${{ secrets.APP_KEY_SEMREL }}
-      - name: Semantic release
-        id: semrel
-        uses: cycjimmy/semantic-release-action@v4
-        with:
-          extra_plugins: |
-            semantic-release-replace-plugin
-          dry_run: ${{ github.event_name != 'push' }}
-          ci: true
-        env:
-          GITHUB_TOKEN: ${{ steps.token.outputs.token }}
+      contents: write
+      issues: write
+      packages: write
+      pull-requests: write
+      statuses: write

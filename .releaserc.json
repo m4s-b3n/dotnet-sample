@@ -38,16 +38,6 @@
         "assets": ["CHANGELOG.md", "helm/common.yaml"]
       }
     ],
-    [
-      "@semantic-release/github",
-      {
-        "assets": [
-          {
-            "path": "voting.zip",
-            "label": "Application"
-          }
-        ]
-      }
-    ]
+    "@semantic-release/github"
   ]
 }

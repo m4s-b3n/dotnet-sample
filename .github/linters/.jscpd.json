@@ -1,0 +1,13 @@
+{
+  "threshold": 5,
+  "ignore": [
+    "**/.dev/**",
+    "**/obj/**",
+    "**/bin/**",
+    "**/wwwroot/lib/**",
+    "**/wwwroot/css/bootstrap/**",
+    "**/wwwroot/css/open-iconic/**",
+    "**/*.min.js",
+    "**/*.min.css"
+  ]
+}

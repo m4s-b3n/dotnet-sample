@@ -1,5 +1,3 @@
-using Orleans;
-
 namespace VotingContract;
 
 public interface IVoteGrain : IGrainWithIntegerKey

@@ -1,0 +1,7 @@
+# Stale vulnerabilities from old .NET 7 build artifacts (not shipped)
+# These deps.json files are from previous builds and will be cleaned on next full build
+CVE-2026-32933
+CVE-2025-9708
+CVE-2024-21319
+CVE-2022-26907
+CVE-2024-21907

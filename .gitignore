@@ -1,8 +1,14 @@
-# Dev
-/dev
+# Hidden directories (whitelist .devcontainer and .github)
+.*/
+!.devcontainer/
+!.github/
+
+# Super-linter
+super-linter-output
+super-linter.log
+github_conf
 
 # Actions
-
 /app
 /src/**/*.trx
 *.zip
@@ -189,7 +195,7 @@ DocProject/Help/html
 publish/
 
 # Publish Web Output
-*.[Pp]ublish.xml
+*.[Pp]publish.xml
 *.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
@@ -322,8 +328,8 @@ node_modules/
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
-# Paket dependency manager
-.paket/paket.exe
+# Packet dependency manager
+.packet/packet.exe
 paket-files/
 
 # FAKE - F# Make

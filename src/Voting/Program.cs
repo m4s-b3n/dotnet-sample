@@ -1,9 +1,10 @@
+using Voting;
 using Voting.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseOrleans((ctx, orleansBuilder) =>
+builder.UseOrleans(orleansBuilder =>
 {
-    if (ctx.HostingEnvironment.IsDevelopment())
+    if (builder.Environment.IsDevelopment())
     {
         // During development time, we don't want to have to deal with
         // storage emulators or other dependencies. Just "Hit F5" to run.
@@ -24,8 +25,9 @@ builder.Host.UseOrleans((ctx, orleansBuilder) =>
 });
 
 // Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
 builder.Services.AddScoped<PollService>();
 builder.Services.AddScoped<DemoService>();
 
@@ -42,6 +44,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
+app.UseAntiforgery();
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 app.Run();

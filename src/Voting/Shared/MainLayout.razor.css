@@ -9,7 +9,7 @@ main {
 }
 
 .sidebar {
-  background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+  background-image: linear-gradient(180deg, rgb(5 39 103) 0%, #3a0647 70%);
 }
 
 .top-row {
@@ -33,7 +33,7 @@ main {
   text-overflow: ellipsis;
 }
 
-@media (max-width: 640.98px) {
+@media (width <= 640.98px) {
   .top-row:not(.auth) {
     display: none;
   }
@@ -48,7 +48,7 @@ main {
   }
 }
 
-@media (min-width: 641px) {
+@media (width >= 641px) {
   .page {
     flex-direction: row;
   }
